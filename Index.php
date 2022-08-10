@@ -34,22 +34,17 @@
 
 
     <h1>Legge inn kilder i databasen</h1>
-    <!--includer insert skjemaet-->
+    <!--inkluder insert skjemaet-->
     <?php
     include './Php Files/database.php';
     ?>
 
 
-    <!--oversi9kt over databasen-->
+    <!--oversikt over databasen-->
     <h2>Mine databasekilder</h2>
     <?php
     include './Php Files/Oversikt.php';
     ?>
 
-
-    <!--Testing-->
-    <?php
-    include '../testing purposes/alldatatest.php';
-    ?>
 
 </html>
