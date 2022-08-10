@@ -1,0 +1,97 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydbwithgoodname
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydbwithgoodname
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydbwithgoodname` DEFAULT CHARACTER SET utf8 ;
+USE `mydbwithgoodname` ;
+
+-- -----------------------------------------------------
+-- Table `mydbwithgoodname`.`Artikel`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydbwithgoodname`.`Artikel` (
+  `Artikel_id` INT NOT NULL AUTO_INCREMENT,
+  `Tittel` VARCHAR(45) NOT NULL,
+  `Link` VARCHAR(200) NULL,
+  `Info` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`Artikel_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydbwithgoodname`.`Forfater`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydbwithgoodname`.`Forfater` (
+  `Forfater_id` INT NOT NULL AUTO_INCREMENT,
+  `ForNavn` VARCHAR(45) NOT NULL,
+  `EtterNavn` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Forfater_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydbwithgoodname`.`Forfater_has_artikel`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydbwithgoodname`.`Forfater_has_artikel` (
+  `Artikel_id` INT NOT NULL,
+  `Forfater_id` INT NOT NULL,
+  `Dato` DATE NOT NULL,
+  PRIMARY KEY (`Artikel_id`, `Forfater_id`),
+  INDEX `fk_table1_has_table2_table21_idx` (`Forfater_id` ASC) ,
+  INDEX `fk_table1_has_table2_table1_idx` (`Artikel_id` ASC) ,
+  CONSTRAINT `fk_table1_has_table2_table1`
+    FOREIGN KEY (`Artikel_id`)
+    REFERENCES `mydbwithgoodname`.`Artikel` (`Artikel_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_table1_has_table2_table21`
+    FOREIGN KEY (`Forfater_id`)
+    REFERENCES `mydbwithgoodname`.`Forfater` (`Forfater_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydbwithgoodname`.`Fag`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydbwithgoodname`.`Fag` (
+  `fag_id` INT NOT NULL AUTO_INCREMENT,
+  `Fag` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`fag_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydbwithgoodname`.`Artikel_has_Fag`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydbwithgoodname`.`Artikel_has_Fag` (
+  `Artikel_Artikel_id` INT NOT NULL,
+  `Fag_fag_id` INT NOT NULL,
+  PRIMARY KEY (`Artikel_Artikel_id`, `Fag_fag_id`),
+  INDEX `fk_Artikel_has_Fag_Fag1_idx` (`Fag_fag_id` ASC) VISIBLE,
+  INDEX `fk_Artikel_has_Fag_Artikel1_idx` (`Artikel_Artikel_id` ASC) ,
+  CONSTRAINT `fk_Artikel_has_Fag_Artikel1`
+    FOREIGN KEY (`Artikel_Artikel_id`)
+    REFERENCES `mydbwithgoodname`.`Artikel` (`Artikel_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Artikel_has_Fag_Fag1`
+    FOREIGN KEY (`Fag_fag_id`)
+    REFERENCES `mydbwithgoodname`.`Fag` (`fag_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
