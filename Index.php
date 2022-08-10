@@ -15,7 +15,16 @@
 
     <!--Header-->
     <header>
-
+        <div class="grid-container">
+            <div class="navbar">
+                <ul>
+                    <li><a href="https://slimien.github.io/Min-digitale-arbeidsbok/index.html">Hjem</a></li>
+                    <li><a href="https://slimien.github.io/Min-digitale-arbeidsbok/HTML/My%20work.html">Mitt arbeid</a></li>
+                    <li><a href="https://slimien.github.io/Min-digitale-arbeidsbok/HTML/About%20me.html">Om meg</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=OCHO0GFerQc&t" target="blanc">Rick Roll</a></li>
+                </ul>
+            </div>
+        </div>
     </header>
 
     <section>
