@@ -16,7 +16,7 @@
         // Opprette en kobling
         $kobling = new mysqli($tjener, $brukernavn, $passord, $database, $port);
 
-        //en djoin for finne innformasjon fra databasen
+        //en join for finne informasjon fra databasen
         $sql = "SELECT a.Tittel, a.Link, a.Info, fag.Fag, f.ForNavn, f.EtterNavn, fha.Dato
         FROM mydbwithgoodname.artikel a, mydbwithgoodname.artikel_has_fag ahf, mydbwithgoodname.fag fag, mydbwithgoodname.forfater f, mydbwithgoodname.forfater_has_artikel fha
         WHERE a.Artikel_id = ahf.Artikel_Artikel_id 
@@ -31,7 +31,7 @@
             die("Noe gikk galt: " . $kobling->connect_error);
         }
 
-        //kjører djoinen
+        //kjører joinen
         $resultat = $kobling->query($sql);
 
     
@@ -49,7 +49,7 @@
 
 
         while ($rad = $resultat->fetch_assoc()) {
-            //Lagre informsjon fra spøringen i variabler med enkle navn
+            //Lagre informsjon fra spørringen i variabler med enkle navn
             $Dato = $rad["Dato"];
             $FN = $rad["ForNavn"];
             $EN = $rad["EtterNavn"];
