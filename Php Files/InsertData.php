@@ -2,7 +2,7 @@
 if (isset($_POST["leggtil"])) { //Når Sjemaet postes
 
 
-    //Kobling Settup
+    //Kobling Setup
     // Tilkoblingsinformasjon
     $tjener = "localhost";
     $brukernavn = "root";
@@ -18,7 +18,7 @@ if (isset($_POST["leggtil"])) { //Når Sjemaet postes
         die("Noe gikk galt: " . $kobling->connect_error);
     }
 
-    // Angi UTF-8 som tegnsett/Set til norskt tastatur
+    // Angi UTF-8 som tegnsett/Sett til norsk tastatur
     $kobling->set_charset("utf8");
 
 
@@ -33,15 +33,15 @@ if (isset($_POST["leggtil"])) { //Når Sjemaet postes
 
 
     //Insert Artikkel
-    $select = "SELECT Artikel_id FROM artikel WHERE Tittel = '{$Tittel}' AND Link = '{$Link}' AND Info = '{$Info}'";//query that looks for duplicate enterys
+    $select = "SELECT Artikel_id FROM artikel WHERE Tittel = '{$Tittel}' AND Link = '{$Link}' AND Info = '{$Info}'";//query that looks for duplicate entrys
     $result = $kobling->query($select);//run query
     $result = $result->fetch_array();//list answers in array
-    if(!$result)//if there are no duplicate enterys insert
+    if(!$result)//if there are no duplicate entrys insert
     {
         $sql_array[] = "INSERT INTO artikel ( Tittel, Link, Info) VALUES ( '$Tittel', '$Link', '$Info')";//legg til artikkelen
-    }else//Hvis den alerede finnes
+    }else//Hvis den allerede finnes
     {
-        echo"den artikkelen finnes alerede men andre ting kan fortsat ha blitt lagt inn";
+        echo"den artikkelen finnes allerede, men andre ting kan fortsatt ha blitt lagt inn";
         echo "<br>";
     }
 
@@ -58,7 +58,7 @@ if (isset($_POST["leggtil"])) { //Når Sjemaet postes
         $sql_array[] = "INSERT INTO forfater (ForNavn, EtterNavn) VALUES ( '$FN', '$EN')";//legg til forfatteren
     }else
     {
-        echo"den forfateren finnes alerede men andre ting kan fortsat ha blitt lagt inn";
+        echo"den forfatteren finnes allerede, men andre ting kan fortsatt ha blitt lagt inn";
         echo "<br>";
     }
     
@@ -72,15 +72,15 @@ if (isset($_POST["leggtil"])) { //Når Sjemaet postes
         $sql_array[] = "INSERT INTO fag (Fag) VALUES ('$Fag')";//legg til faget
     }else
     {
-        echo"det faget finnes alerede men andre ting kan fortsat ha blitt lagt inn";
+        echo"det faget finnes allerede, men andre ting kan fortsatt ha blitt lagt inn";
         echo "<br>";
     }
     
 
 
 
-    foreach ($sql_array as $sql) {//Gå gjennom alle spøringene
-        //See om koblingen virker
+    foreach ($sql_array as $sql) {//Gå gjennom alle spørringene
+        //Se om koblingen virker
         if ($kobling->query($sql)) {
             //echo "Spørringen $sql ble gjennomført.";
         } else {
@@ -91,22 +91,22 @@ if (isset($_POST["leggtil"])) { //Når Sjemaet postes
 
     //Set foreign keys
     //Artikkel id
-    $select = "SELECT Artikel_id FROM artikel WHERE Tittel = '{$Tittel}' AND Link = '{$Link}' AND Info = '{$Info}'"; //Finn id til artikkelen som nettop ble lagt til
-    //Kjør spøring og konverter resultat til int
+    $select = "SELECT Artikel_id FROM artikel WHERE Tittel = '{$Tittel}' AND Link = '{$Link}' AND Info = '{$Info}'"; //Finn id til artikkelen som nettopp ble lagt til
+    //Kjør spørring og konverter resultat til int
     $result = $kobling->query($select);
     $result = $result->fetch_array();
     $AID = intval($result[0]);
 
-    //Forfater id
-    $select = "SELECT Forfater_id FROM forfater WHERE ForNavn = '{$FN}' AND EtterNavn = '{$EN}'";//Finn id til forfateren som nettop ble lagt til
-    //Kjør spøring og konverter resultat til int
+    //Forfatter id
+    $select = "SELECT Forfater_id FROM forfater WHERE ForNavn = '{$FN}' AND EtterNavn = '{$EN}'";//Finn id til forfatteren som nettopp ble lagt til
+    //Kjør spørring og konverter resultat til int
     $result = $kobling->query($select);
     $result = $result->fetch_array();
     $FID = intval($result[0]);
 
     //Fag id
     $select = "SELECT fag_id FROM fag WHERE Fag = '{$Fag}'"; //Finn id til fag som nettop ble lagt til
-    //Kjør spøring og konverter resultat til int
+    //Kjør spørring og konverter resultat til int
     $result = $kobling->query($select);
     $result = $result->fetch_array();
     $FagID = intval($result[0]);
@@ -114,7 +114,7 @@ if (isset($_POST["leggtil"])) { //Når Sjemaet postes
     //insert Artikkel_Has_fag
     $sql_array_fk[] = "INSERT INTO artikel_has_fag (Artikel_Artikel_id , Fag_fag_id ) VALUES ('$AID', '$FagID')";
 
-    //Insert Forfater_has_artikkel
+    //Insert Forfatter_has_artikkel
     $sql_array_fk[] = "INSERT INTO forfater_has_artikel (Forfater_id, Artikel_id, Dato) VALUES ('$FID', '$AID', '$Dato')";
 
 
