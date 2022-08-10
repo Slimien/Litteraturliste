@@ -4,7 +4,7 @@ include "./Php Files/InsertData.php"
 
 <DOCTYPE html>
 
-    <!--form for å legge inn ting-->
+    <!--skjema for å legge inn ting-->
     <form method="POST">
         <input type="text" name="ForNavn" required>
         Forfatter fornavn
